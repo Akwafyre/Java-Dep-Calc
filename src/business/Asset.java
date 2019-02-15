@@ -10,7 +10,7 @@ import java.lang.Math;
  *
  * @author Gabe Haggard
  */
-public class Asset {
+abstract public class Asset {
     private String assetNm, errorMessage;
     private int Life;
     private double cost, salvage;
@@ -70,7 +70,6 @@ public class Asset {
     public void setAssetNm(String assetNm) {
         this.assetNm = assetNm;
     }
-
     public void setLife(int Life) {
         this.Life = Life;
     }
@@ -80,5 +79,8 @@ public class Asset {
     public void setSalvage(double salvage) {
         this.salvage = salvage;
     }
+    abstract public double getBegBal(int year);
+    abstract public double getAnnDep(int year);
+    abstract public double getEndBal(int year);
 }
 

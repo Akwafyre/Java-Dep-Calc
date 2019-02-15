@@ -41,7 +41,8 @@ public class AssetSL extends Asset {
         }
             
     }
-         public double getAnnDep(){
+        @Override
+         public double getAnnDep(int year){
           if (!this.built){
             BuildAsset();
             if (!this.built){
@@ -50,6 +51,7 @@ public class AssetSL extends Asset {
         }
             return this.annDepr;       
     }
+         @Override
         public double getBegBal (int year){
         if (!this.built){
             BuildAsset();
@@ -63,6 +65,7 @@ public class AssetSL extends Asset {
         }
             return this.begBal [year -1];
     }
+        @Override
         public double getEndBal (int year){
         if (!this.built){
             BuildAsset();

@@ -5,9 +5,8 @@
 package depinherit;
 
 
-import business.Asset1_5DL;
-import business.AssetSL;
-import business.Asset2DL;
+
+import business.*;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
 import org.jdesktop.application.SingleFrameApplication;
@@ -382,32 +381,22 @@ public class DepInheritView extends FrameView {
           return;
        }
          
-    Asset2DL AssetDDL = null;
-    AssetSL slAsset = null;
-    Asset1_5DL Asset15dl = null;
+    Asset a = null;
     if (jradSL.isSelected()){
-      slAsset = new AssetSL(jtxtAssetNm.getText(),cost,salvage,life);          
-    if (!slAsset.GetErrorMessage().isEmpty()){
-        statusMessageLabel.setText(slAsset.GetErrorMessage());
-        return;
-    }
+      a = new AssetSL(jtxtAssetNm.getText(),cost,salvage,life);          
     }
     else if (jradDDL.isSelected()){
-     AssetDDL = new Asset2DL(jtxtAssetNm.getText(),cost,salvage,life);
-         if (!AssetDDL.GetErrorMessage().isEmpty()){
-        statusMessageLabel.setText(AssetDDL.GetErrorMessage());
-        return;
-    }
+     a = new Asset2DL(jtxtAssetNm.getText(),cost,salvage,life);
     }
     else if (jrad1_5.isSelected()){
-     Asset15dl = new Asset1_5DL(jtxtAssetNm.getText(),cost,salvage,life);
-         if (!Asset15dl.GetErrorMessage().isEmpty()){
-        statusMessageLabel.setText(Asset15dl.GetErrorMessage());
-        return;
-    }
+     a = new Asset1_5DL(jtxtAssetNm.getText(),cost,salvage,life);
     }
     else {
         statusMessageLabel.setText("No Method Selected");
+        return;
+    }
+    if (!a.GetErrorMessage().isEmpty()){
+        statusMessageLabel.setText(a.GetErrorMessage());
         return;
     }
        
@@ -423,26 +412,10 @@ public class DepInheritView extends FrameView {
        NumberFormat curr = NumberFormat.getCurrencyInstance();
        for(int i=1; i <= life; i++){
            jtblSched.setValueAt(i,i-1,0);
-           if (jradSL.isSelected()){
-           jtblSched.setValueAt( curr.format(slAsset.getBegBal(i)), i-1, 1);
-           jtblSched.setValueAt(
-                         curr.format(slAsset.getAnnDep()), i-1, 2);
-           jtblSched.setValueAt(curr.format(slAsset.getEndBal(i)), i-1, 3);
-           }
-           else if (jradDDL.isSelected()){
-           jtblSched.setValueAt( curr.format(AssetDDL.getBegBal(i)), i-1, 1);
-           jtblSched.setValueAt(
-                         curr.format(AssetDDL.getAnnDep(i)), i-1, 2);
-           jtblSched.setValueAt(curr.format(AssetDDL.getEndBal(i)), i-1, 3);
-           }
-           else if (jrad1_5.isSelected()){
-           jtblSched.setValueAt( curr.format(Asset15dl.getBegBal(i)), i-1, 1);
-           jtblSched.setValueAt(
-                         curr.format(Asset15dl.getAnnDep(i)), i-1, 2);
-           jtblSched.setValueAt(curr.format(Asset15dl.getEndBal(i)), i-1, 3);
-           }
+           jtblSched.setValueAt( curr.format(a.getBegBal(i)), i-1, 1);
+           jtblSched.setValueAt(curr.format(a.getAnnDep(i)), i-1, 2);
+           jtblSched.setValueAt(curr.format(a.getEndBal(i)), i-1, 3);
        }
-
     }//GEN-LAST:event_jbtnCalcActionPerformed
 
     private void jbtnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnClearActionPerformed

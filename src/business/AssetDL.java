@@ -54,6 +54,7 @@ private void BuildAsset(){
             this.built = false;
         }       
     }
+    @Override
          public double getAnnDep(int year){
         if (!this.built){
             BuildAsset();
@@ -67,6 +68,7 @@ private void BuildAsset(){
         }
             return this.annDepr[year -1];       
     }
+    @Override
         public double getBegBal (int year){
         if (!this.built){
             BuildAsset();
@@ -80,6 +82,7 @@ private void BuildAsset(){
         }
             return this.begBal [year -1];
     }
+    @Override
         public double getEndBal (int year){
         if (!this.built){
             BuildAsset();
