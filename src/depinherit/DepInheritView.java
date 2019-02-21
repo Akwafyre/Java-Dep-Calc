@@ -125,6 +125,7 @@ public class DepInheritView extends FrameView {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblSched = new javax.swing.JTable();
         jrad1_5 = new javax.swing.JRadioButton();
+        sumOfd = new javax.swing.JRadioButton();
         menuBar = new javax.swing.JMenuBar();
         javax.swing.JMenu fileMenu = new javax.swing.JMenu();
         jmnuSave = new javax.swing.JMenuItem();
@@ -213,6 +214,9 @@ public class DepInheritView extends FrameView {
         jrad1_5.setText(resourceMap.getString("jrad1_5.text")); // NOI18N
         jrad1_5.setName("jrad1_5"); // NOI18N
 
+        sumOfd.setText(resourceMap.getString("sumOfd.text")); // NOI18N
+        sumOfd.setName("sumOfd"); // NOI18N
+
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
         mainPanelLayout.setHorizontalGroup(
@@ -224,9 +228,11 @@ public class DepInheritView extends FrameView {
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jtxtAssetNm, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jrad1_5)))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jrad1_5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jradSL)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
@@ -246,17 +252,18 @@ public class DepInheritView extends FrameView {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jbtnClear))))
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jbtnCalc)
-                            .addComponent(jradSL))
-                        .addGap(18, 18, 18)
-                        .addComponent(jradDDL)))
-                .addGap(0, 54, Short.MAX_VALUE))
+                        .addGap(9, 9, 9)
+                        .addComponent(jbtnCalc))
+                    .addGroup(mainPanelLayout.createSequentialGroup()
+                        .addComponent(jradDDL)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(sumOfd)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 512, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mainPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -285,7 +292,8 @@ public class DepInheritView extends FrameView {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jradSL)
                     .addComponent(jradDDL)
-                    .addComponent(jrad1_5))
+                    .addComponent(jrad1_5)
+                    .addComponent(sumOfd))
                 .addGap(6, 6, 6)
                 .addComponent(jbtnCalc)
                 .addGap(18, 18, 18)
@@ -333,11 +341,11 @@ public class DepInheritView extends FrameView {
         statusPanel.setLayout(statusPanelLayout);
         statusPanelLayout.setHorizontalGroup(
             statusPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE)
+            .addComponent(statusPanelSeparator, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
             .addGroup(statusPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(statusMessageLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 362, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 372, Short.MAX_VALUE)
                 .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusAnimationLabel)
@@ -390,6 +398,9 @@ public class DepInheritView extends FrameView {
     }
     else if (jrad1_5.isSelected()){
      a = new Asset1_5DL(jtxtAssetNm.getText(),cost,salvage,life);
+    }
+    else if (sumOfd.isSelected()){
+      a = new AssetSYD(jtxtAssetNm.getText(),cost,salvage,life);
     }
     else {
         statusMessageLabel.setText("No Method Selected");
@@ -454,6 +465,7 @@ public class DepInheritView extends FrameView {
     private javax.swing.JLabel statusAnimationLabel;
     private javax.swing.JLabel statusMessageLabel;
     private javax.swing.JPanel statusPanel;
+    private javax.swing.JRadioButton sumOfd;
     // End of variables declaration//GEN-END:variables
 
     private final Timer messageTimer;
