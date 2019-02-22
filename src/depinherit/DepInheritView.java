@@ -3,9 +3,6 @@
  */
 
 package depinherit;
-
-
-
 import business.*;
 import org.jdesktop.application.Action;
 import org.jdesktop.application.ResourceMap;
@@ -214,6 +211,7 @@ public class DepInheritView extends FrameView {
         jrad1_5.setText(resourceMap.getString("jrad1_5.text")); // NOI18N
         jrad1_5.setName("jrad1_5"); // NOI18N
 
+        buttonGroup1.add(sumOfd);
         sumOfd.setText(resourceMap.getString("sumOfd.text")); // NOI18N
         sumOfd.setName("sumOfd"); // NOI18N
 
@@ -384,7 +382,7 @@ public class DepInheritView extends FrameView {
          statusMessageLabel.setText("A Value is not numeric");
          return;
        }
-       if (!jradSL.isSelected() && !jradDDL.isSelected() && !jrad1_5.isSelected()){
+       if (!jradSL.isSelected() && !jradDDL.isSelected() && !jrad1_5.isSelected() && !sumOfd.isSelected()){
           statusMessageLabel.setText("No Depreciation type selscted");
           return;
        }
@@ -411,7 +409,10 @@ public class DepInheritView extends FrameView {
         return;
     }
        
-       String[] cols = {"Year", "Beg.bal","Ann.dep", "End.bal"};
+      String[] cols = sumOfd.isSelected() 
+              ? new String[] {"Year", "Beg.bal", "Ann.dep", "End.dep", "Dep.rate"} 
+              : new String[] {"Year","Beg.bal", "Ann.dep", "End.dep"};
+      
        String [][] table = new String[life][4];
        DefaultTableModel mod = new DefaultTableModel(table, cols);
        jtblSched.setModel(mod);
@@ -426,6 +427,10 @@ public class DepInheritView extends FrameView {
            jtblSched.setValueAt( curr.format(a.getBegBal(i)), i-1, 1);
            jtblSched.setValueAt(curr.format(a.getAnnDep(i)), i-1, 2);
            jtblSched.setValueAt(curr.format(a.getEndBal(i)), i-1, 3);
+           if (sumOfd.isSelected()){
+              jtblSched.setValueAt(((AssetSYD) a).getAnnDepRate(i), i-1, 4);
+           }
+           
        }
     }//GEN-LAST:event_jbtnCalcActionPerformed
 

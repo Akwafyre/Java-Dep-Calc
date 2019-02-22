@@ -239,6 +239,9 @@
         </Component>
         <Component class="javax.swing.JRadioButton" name="sumOfd">
           <Properties>
+            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+              <ComponentRef name="buttonGroup1"/>
+            </Property>
             <Property name="text" type="java.lang.String" resourceKey="sumOfd.text"/>
             <Property name="name" type="java.lang.String" value="sumOfd" noResource="true"/>
           </Properties>

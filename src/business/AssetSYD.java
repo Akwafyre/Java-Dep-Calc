@@ -7,7 +7,7 @@ package business;
 public class AssetSYD extends Asset {
     
     private double [] begBal,endBal;
-    private double [] annDepr;
+    private double [] annDepr, annDepRate;
     private boolean built;
 
     public AssetSYD(String name, double cost, double salvage, int life){
@@ -22,8 +22,9 @@ public class AssetSYD extends Asset {
             this.begBal = new double[getLife()];
             this.endBal = new double[getLife()];
             this.annDepr = new double [getLife()];
-            
-            double sumOfYears = getLife() * (getLife()+1)/2;
+            int usefulLife = getLife();
+            int life = getLife();
+            double sumOfYears = life * (life + 1) / 2;
             this.begBal[0] = getCost();
             
             
@@ -32,9 +33,11 @@ public class AssetSYD extends Asset {
                     this.begBal[i] = this.endBal[i-1];
                 }               
 
-            double depricationRate = getLife() * sumOfYears;
+            double depricationRate = usefulLife / sumOfYears;
             this.annDepr[i] = this.begBal[i] * depricationRate;
             this.endBal[i] = this.begBal[i] - this.annDepr[i];
+            this.annDepRate[i] = depricationRate;
+            usefulLife--;
             }
            
             
@@ -55,7 +58,7 @@ public class AssetSYD extends Asset {
                 return -1;
             }
         }
-            return this.annDepr[year];       
+            return this.annDepr[year - 1];       
     }
          @Override
         public double getBegBal (int year){
@@ -84,5 +87,14 @@ public class AssetSYD extends Asset {
             return -1;
         }
         return this.endBal [year -1];
-    }     
+    }
+       public double getAnnDepRate(int year){
+          if (!this.built){
+            BuildAsset();
+            if (!this.built){
+                return -1;
+            }
+        }
+            return this.annDepRate[year - 1];       
+    }    
 }
