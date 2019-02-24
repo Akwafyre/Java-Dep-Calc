@@ -1,5 +1,7 @@
 package business;
 
+import java.text.DecimalFormat;
+
 /**
  *
  * @author Oriyn
@@ -22,9 +24,10 @@ public class AssetSYD extends Asset {
             this.begBal = new double[getLife()];
             this.endBal = new double[getLife()];
             this.annDepr = new double [getLife()];
+            this.annDepRate = new double [getLife()];
             int usefulLife = getLife();
             int life = getLife();
-            double sumOfYears = life * (life + 1) / 2;
+            double sumOfYears = life * (life + 1.0) / 2.0;
             this.begBal[0] = getCost();
             
             
@@ -36,16 +39,14 @@ public class AssetSYD extends Asset {
             double depricationRate = usefulLife / sumOfYears;
             this.annDepr[i] = this.begBal[i] * depricationRate;
             this.endBal[i] = this.begBal[i] - this.annDepr[i];
-            this.annDepRate[i] = depricationRate;
+            this.annDepRate[i] = Math.round(depricationRate * 100000) / 1000.0d;
             usefulLife--;
-            }
-           
-            
-            this.built = true; 
+            }            
+               this.built = true; 
         }
         
         catch(Exception e){
-            setErrorMsg("Asset build error" + e.getMessage());
+            setErrorMsg("Asset build error " + e.getMessage());
             this.built = false;
         }
             

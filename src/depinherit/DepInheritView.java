@@ -428,7 +428,7 @@ public class DepInheritView extends FrameView {
            jtblSched.setValueAt(curr.format(a.getAnnDep(i)), i-1, 2);
            jtblSched.setValueAt(curr.format(a.getEndBal(i)), i-1, 3);
            if (sumOfd.isSelected()){
-              jtblSched.setValueAt(((AssetSYD) a).getAnnDepRate(i), i-1, 4);
+              jtblSched.setValueAt(((AssetSYD) a).getAnnDepRate(i) + "%", i-1, 4);
            }
            
        }
