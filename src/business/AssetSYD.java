@@ -29,6 +29,7 @@ public class AssetSYD extends Asset {
             int life = getLife();
             double sumOfYears = life * (life + 1.0) / 2.0;
             this.begBal[0] = getCost();
+            double depBase = this.begBal[0] - getSalvage(); 
             
             
             for (int i=0; i < getLife(); i++){
@@ -36,8 +37,8 @@ public class AssetSYD extends Asset {
                     this.begBal[i] = this.endBal[i-1];
                 }               
 
-            double depricationRate = usefulLife / sumOfYears;
-            this.annDepr[i] = this.begBal[i] * depricationRate;
+            double depricationRate = usefulLife / sumOfYears;            
+            this.annDepr[i] = depBase * depricationRate;
             this.endBal[i] = this.begBal[i] - this.annDepr[i];
             this.annDepRate[i] = Math.round(depricationRate * 100000) / 1000.0d;
             usefulLife--;
